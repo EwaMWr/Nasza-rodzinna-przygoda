@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 Nasza Azjatycka Przygoda. Stworzone z ❤️ i ✈️ przez rodzinę.</p>
+      <p>Blog, by pamiętać, rosnąć i inspirować innych do podróży z głową i sercem.</p>
+    </div>
+  </footer>
+
+  <!-- Przycisk do przewijania do góry -->
+  <div class="fab" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">⬆️</div>
+
+  <script>
+    // Pasek postępu przewijania
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.body.scrollHeight - window.innerHeight;
+      const scrollPercent = (scrollTop / docHeight) * 100;
+      document.getElementById('scrollProgress').style.width = `${scrollPercent}%`;
+    });
+
+    // Płynne przewijanie do sekcji
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          window.scrollTo({
+            top: target.offsetTop - 100,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+
+    // Animacja pojawiania się wpisów dziennika
+    document.addEventListener('DOMContentLoaded', () => {
+      const logs = document.querySelectorAll('.day-log');
+      logs.forEach((log, i) => {
+        log.style.opacity = '0';
+        log.style.transform = 'translateY(20px)';
+        log.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        setTimeout(() => {
+          log.style.opacity = '1';
+          log.style.transform = 'translateY(0)';
+        }, 300 + i * 100);
+      });
+    });
+  </script>
+</body>
+</html>
